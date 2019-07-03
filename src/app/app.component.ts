@@ -1,6 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { AgGridAngular } from 'ag-grid-angular';
+import { Component, OnInit } from '@angular/core';
 import { NumberFormatterComponent } from './number-formatter/number-formatter.component';
 import { NumericEditorComponent } from './numeric-editor/numeric-editor.component';
 import { RangeFilterComponent } from './range-filter/range-filter.component';
@@ -11,8 +9,6 @@ import { RangeFilterComponent } from './range-filter/range-filter.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  @ViewChild('agGrid', { static: true }) agGrid: AgGridAngular;
-
   columnDefs = [
     { headerName: 'Make', field: 'make' },
     { headerName: 'Model', field: 'model' },
@@ -26,19 +22,8 @@ export class AppComponent implements OnInit {
     }
   ];
 
-  autoGroupColumnDef = {
-    headerName: 'Model',
-    field: 'model',
-    cellRenderer: 'agGroupCellRenderer',
-    cellRendererParams: {
-      checkbox: true
-    }
-  };
+  rowData = [];
 
-  rowData: [];
-
-  constructor(private http: HttpClient) {}
-  // Register component
   frameworkComponents = {
     numberFormatterComponent: NumberFormatterComponent,
     numericEditorComponent: NumericEditorComponent,
@@ -50,14 +35,4 @@ export class AppComponent implements OnInit {
       .then(result => result.json())
       .then(rowData => (this.rowData = rowData));
   }
-  // getSelectedRows() {
-  //   const selectedNodes = this.agGrid.api.getSelectedNodes();
-  //   console.log('selectedNodes', selectedNodes);
-  //   const selectedData = selectedNodes.map(node => node.data);
-  //   console.log('selectedData', selectedData);
-  //   const selectedDataStringPresentation = selectedData
-  //     .map(node => node.make + ' ' + node.model)
-  //     .join(', ');
-  //   alert(`Selected nodes: ${selectedDataStringPresentation}`);
-  // }
 }

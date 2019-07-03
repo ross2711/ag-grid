@@ -1,7 +1,7 @@
-// filters out cars based on a price range
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+
 @Component({
-  selector: 'app-range-filter-cell',
+  selector: 'app-range-filter',
   template: `
     <form (submit)="onSubmit($event)">
       <input #i name="filter" [value]="filter" />
