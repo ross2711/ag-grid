@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AgGridAngular } from 'ag-grid-angular';
 import { NumberFormatterComponent } from './number-formatter/number-formatter.component';
 import { NumericEditorComponent } from './numeric-editor/numeric-editor.component';
+import { RangeFilterComponent } from './range-filter/range-filter.component';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,6 @@ import { NumericEditorComponent } from './numeric-editor/numeric-editor.componen
 })
 export class AppComponent implements OnInit {
   @ViewChild('agGrid', { static: true }) agGrid: AgGridAngular;
-  title = 'app';
 
   columnDefs = [
     { headerName: 'Make', field: 'make' },
@@ -19,14 +19,10 @@ export class AppComponent implements OnInit {
     {
       headerName: 'Price',
       field: 'price',
-
-      /* enable editing */
       editable: true,
-
-      /* specify custom cell renderer */
       cellRenderer: 'numberFormatterComponent',
-      /* custom cell editor */
-      cellEditor: 'numericEditorComponent'
+      cellEditor: 'numericEditorComponent',
+      filter: 'rangeFilterComponent'
     }
   ];
 
@@ -39,27 +35,29 @@ export class AppComponent implements OnInit {
     }
   };
 
-  rowData: any;
+  rowData: [];
 
   constructor(private http: HttpClient) {}
   // Register component
   frameworkComponents = {
     numberFormatterComponent: NumberFormatterComponent,
-    /* custom cell editor component*/
-    numericEditorComponent: NumericEditorComponent
+    numericEditorComponent: NumericEditorComponent,
+    rangeFilterComponent: RangeFilterComponent
   };
 
   ngOnInit() {
-    this.rowData = this.http.get('https://api.myjson.com/bins/ly7d1');
+    fetch('https://api.myjson.com/bins/15psn9')
+      .then(result => result.json())
+      .then(rowData => (this.rowData = rowData));
   }
-  getSelectedRows() {
-    const selectedNodes = this.agGrid.api.getSelectedNodes();
-    console.log('selectedNodes', selectedNodes);
-    const selectedData = selectedNodes.map(node => node.data);
-    console.log('selectedData', selectedData);
-    const selectedDataStringPresentation = selectedData
-      .map(node => node.make + ' ' + node.model)
-      .join(', ');
-    alert(`Selected nodes: ${selectedDataStringPresentation}`);
-  }
+  // getSelectedRows() {
+  //   const selectedNodes = this.agGrid.api.getSelectedNodes();
+  //   console.log('selectedNodes', selectedNodes);
+  //   const selectedData = selectedNodes.map(node => node.data);
+  //   console.log('selectedData', selectedData);
+  //   const selectedDataStringPresentation = selectedData
+  //     .map(node => node.make + ' ' + node.model)
+  //     .join(', ');
+  //   alert(`Selected nodes: ${selectedDataStringPresentation}`);
+  // }
 }

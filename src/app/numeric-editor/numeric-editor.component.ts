@@ -1,14 +1,25 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-numeric-editor',
+  selector: 'app-numeric-editor-cell',
   template: `
-    <input (keypress)="onKeyPress($event)" (keydown)="onKeyDown($event)" />
+    <input
+      #i
+      [value]="params.value"
+      (keypress)="onKeyPress($event)"
+      (keydown)="onKeyDown($event)"
+    />
   `
 })
 export class NumericEditorComponent implements AfterViewInit {
   @ViewChild('i', { static: true }) textInput;
   params;
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.textInput.nativeElement.focus();
+    });
+  }
 
   agInit(params: any): void {
     this.params = params;
@@ -32,11 +43,5 @@ export class NumericEditorComponent implements AfterViewInit {
     if (event.keyCode === 39 || event.keyCode === 37) {
       event.stopPropagation();
     }
-  }
-
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.textInput.nativeElement.focus();
-    });
   }
 }

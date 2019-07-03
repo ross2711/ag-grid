@@ -1,4 +1,16 @@
-<button (click)="getSelectedRows()">
+<ag-grid-angular
+  style="width: 500px; height: 500px;"
+  class="ag-theme-balham"
+  [enableSorting]="true"
+  [enableFilter]="true"
+  [pagination]="true"
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [frameworkComponents]="frameworkComponents"
+>
+</ag-grid-angular>
+
+<!-- <button (click)="getSelectedRows()">
   Get Selected Rows (send data to server)
 </button>
 
@@ -8,12 +20,13 @@
   class="ag-theme-balham"
   [autoGroupColumnDef]="autoGroupColumnDef"
   [pagination]="true"
+  [enableFilter]="true"
   [rowData]="rowData | async"
   [columnDefs]="columnDefs"
   rowSelection="multiple"
   [frameworkComponents]="frameworkComponents"
 >
-</ag-grid-angular>
+</ag-grid-angular> -->
 
 <!-- <ag-grid-angular
   style="width: 500px; height: 500px;"
