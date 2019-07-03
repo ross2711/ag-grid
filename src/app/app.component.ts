@@ -13,8 +13,16 @@ export class AppComponent implements OnInit {
   title = 'app';
 
   columnDefs = [
-    { headerName: 'Make', field: 'make', rowGroup: true },
-    { headerName: 'Price', field: 'price', editable: true }
+    { headerName: 'Make', field: 'make' },
+    { headerName: 'Model', field: 'model' },
+    {
+      headerName: 'Price',
+      field: 'price',
+      editable: true,
+
+      /* specify custom cell renderer */
+      cellRenderer: 'numberFormatterComponent'
+    }
   ];
 
   autoGroupColumnDef = {
@@ -27,12 +35,6 @@ export class AppComponent implements OnInit {
   };
 
   rowData: any;
-  // Hardcoded data
-  // rowData = [
-  //   { make: 'Toyota', model: 'Celica', price: 35000 },
-  //   { make: 'Ford', model: 'Mondeo', price: 32000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 }
-  // ];
 
   constructor(private http: HttpClient) {}
   frameworkComponents = {
