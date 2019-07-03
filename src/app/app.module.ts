@@ -6,9 +6,10 @@ import { AgGridModule } from 'ag-grid-angular';
 import { HttpClientModule } from '@angular/common/http';
 import 'ag-grid-enterprise';
 import { NumberFormatterComponent } from './number-formatter/number-formatter.component';
+import { NumericEditorComponent } from './numeric-editor/numeric-editor.component';
 
 @NgModule({
-  declarations: [AppComponent, NumberFormatterComponent],
+  declarations: [AppComponent, NumberFormatterComponent, NumericEditorComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

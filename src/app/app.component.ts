@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AgGridAngular } from 'ag-grid-angular';
 import { NumberFormatterComponent } from './number-formatter/number-formatter.component';
+import { NumericEditorComponent } from './numeric-editor/numeric-editor.component';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +19,14 @@ export class AppComponent implements OnInit {
     {
       headerName: 'Price',
       field: 'price',
+
+      /* enable editing */
       editable: true,
 
       /* specify custom cell renderer */
-      cellRenderer: 'numberFormatterComponent'
+      cellRenderer: 'numberFormatterComponent',
+      /* custom cell editor */
+      cellEditor: 'numericEditorComponent'
     }
   ];
 
@@ -37,8 +42,11 @@ export class AppComponent implements OnInit {
   rowData: any;
 
   constructor(private http: HttpClient) {}
+  // Register component
   frameworkComponents = {
-    numberFormatterComponent: NumberFormatterComponent
+    numberFormatterComponent: NumberFormatterComponent,
+    /* custom cell editor component*/
+    numericEditorComponent: NumericEditorComponent
   };
 
   ngOnInit() {
