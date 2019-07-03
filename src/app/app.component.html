@@ -7,9 +7,11 @@
   style="width: 500px; height: 500px;"
   class="ag-theme-balham"
   [autoGroupColumnDef]="autoGroupColumnDef"
+  [pagination]="true"
   [rowData]="rowData | async"
   [columnDefs]="columnDefs"
   rowSelection="multiple"
+  [frameworkComponents]="frameworkComponents"
 >
 </ag-grid-angular>
 
